@@ -10,12 +10,12 @@ d3.json(url).then(function(data){
     console.log(samples);
     console.log(metadata);
 
-    // CREATES CHARTS (FROM SAMPLE OBJECT)
+    // CREATES CHARTS FROM SAMPLE OBJECT
     function createChart(sampleId){
         let sampleData = samples.filter(function (sample){
             return sample.id == sampleId;
         })[0];
-
+        console.log(sampleData);
         let sortedData=sampleData.sample_values.map(function(value,index){
             return{
                 sample_value: value,
@@ -57,11 +57,31 @@ d3.json(url).then(function(data){
         };
         Plotly.newPlot('bubble',[tracedata2],layout2);
     }
+    
+    //PULLS INFO FROM METADATA ARRAY
+    function getMetadata(sample){
+        let Meta = metadata.filter(function (m){
+        return m.id == sample;
+        })[0];
 
+        let metadataText = d3.select("#sample-metadata");
+        
+        metadataText.html("")
 
+        metadataText.append("p").text(`ID: ${Meta.id}`);
+        metadataText.append("p").text(`Ethnicity: ${Meta.ethnicity}`);
+        metadataText.append("p").text(`Gender: ${Meta.gender}`);
+        metadataText.append("p").text(`Age: ${Meta.age}`);
+        metadataText.append("p").text(`Location: ${Meta.location}`);
+        metadataText.append("p").text(`bb type: ${Meta.bbtype}`);
+        metadataText.append("p").text(`wfreq: ${Meta.wfreq}`);
+        
+    }
+    
     function init(){
         let init = samples[0].id;
         createChart(init);
+        getMetadata(init);
     };
     
     let dropdown = d3.select("#selDataset");
@@ -69,9 +89,9 @@ d3.json(url).then(function(data){
     dropdown.on('change',function(){
     let selectedId = d3.select(this).property('value');
     createChart(selectedId);
+    getMetadata(selectedId);
     
     });
-
 
     init();
 });
