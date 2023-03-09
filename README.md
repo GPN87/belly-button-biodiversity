@@ -1,5 +1,5 @@
 # belly-button-challenge
-##Overview
+## Overview
 This repository contains:
 - an index page which displays a dashboard of data retrieved from the Belly Button Biodiversity API. It has been built using the D3 and Plotly libraries of Javascript.
 
@@ -11,7 +11,7 @@ This repository contains:
 
 - the page is hosted on github pages and can be found [here](https://gpn87.github.io/belly-button-challenge/)
 
-##How to use
+## How to use
 to clone this repository enter the following command:
 ```
 git clone https://github.com/GPN87/belly-button-challenge.git

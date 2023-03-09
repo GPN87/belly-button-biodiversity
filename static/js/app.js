@@ -10,7 +10,7 @@ d3.json(url).then(function(data){
     console.log(samples);
     console.log(metadata);
 
-    // CREATES CHARTS FROM SAMPLE OBJECT
+    // CREATES CHARTS FROM SAMPLE ARRAY
     function sampleCharts(sampleId){
        // This returns all objects within the array that have an id the same as the argument id.
         let sampleData = samples.filter(function (sample){
@@ -71,6 +71,7 @@ d3.json(url).then(function(data){
 
         let metadataText = d3.select("#sample-metadata");
         
+        //Metadata text information panel
         metadataText.html("")
 
         metadataText.append("p").text(`ID: ${Meta.id}`);
@@ -82,7 +83,7 @@ d3.json(url).then(function(data){
         metadataText.append("p").text(`wfreq: ${Meta.wfreq}`);
         
 
-        // //Gauge Chart
+        // Gauge Chart
         let tracedata3 = [{
         domain: { x: [0, 1], y: [0, 1] },
         value: Meta.wfreq,
@@ -112,12 +113,14 @@ Plotly.newPlot('gauge', tracedata3, layout3);
 
 
     }
+    //INITIALISING FUNCTION
     function init(){
         let init = samples[0].id;
         sampleCharts(init);
         getMetadata(init);
     };
     
+    //CONSTRUCTS DROPDOWN TEXT AND EVENT HANDLER 'ON' CHANGE
     let dropdown = d3.select("#selDataset");
     dropdown.selectAll("option").data(samples).enter().append("option").attr("value",function(s){return s.id;}).text(function(d){return "Sample "+ d.id;});
     dropdown.on('change',function(){
