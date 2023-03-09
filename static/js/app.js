@@ -96,11 +96,11 @@ d3.json(url).then(function(data){
         { range: [1, 2], color: "silver",text:"1-2" },
         { range: [2, 3], color: "lightgray",text:"2-3" },
         { range: [3, 4], color: "gainsboro",text:"3-4" },
-        { range: [4,5], color: "honeydew",text:"4-5" },
+        { range: [4, 5], color: "honeydew",text:"4-5" },
         { range: [5, 6], color: "lightgreen",text:"5-6" },
-        { range: [6,7], color: "greenyellow",text:"6-7" },
-        { range: [7,8], color: "lawngreen",text:"7-8" },
-        { range: [8,9], color: "lime",text:"8-9" }
+        { range: [6, 7], color: "greenyellow",text:"6-7" },
+        { range: [7, 8], color: "lawngreen",text:"7-8" },
+        { range: [8, 9], color: "lime",text:"8-9" }
         ]
         }
     }
@@ -119,7 +119,7 @@ Plotly.newPlot('gauge', tracedata3, layout3);
     };
     
     let dropdown = d3.select("#selDataset");
-    let dropdownoptions = dropdown.selectAll("option").data(samples).enter().append("option").attr("value",function(s){return s.id;}).text(function(d){return "Sample "+ d.id;});
+    dropdown.selectAll("option").data(samples).enter().append("option").attr("value",function(s){return s.id;}).text(function(d){return "Sample "+ d.id;});
     dropdown.on('change',function(){
     let selectedId = d3.select(this).property('value');
     sampleCharts(selectedId);
